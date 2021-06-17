@@ -1,0 +1,24 @@
+$ mkdir exercise-0
+$ cd ex*0
+$ ls
+$ vi index.html
+$ vi run.sh
+$ source run.sh
+Serving HTTP on :: port 8099 (http://[::]:8099/) ...
+^C
+Keyboard interrupt received, exiting.
+$ vi run.bat
+$ ls
+index.html	run.bat		run.sh
+$ source run.sh
+Serving HTTP on :: port 8099 (http://[::]:8099/) ...
+::1 - - [17/Jun/2021 19:20:54] "GET / HTTP/1.1" 200 -
+::1 - - [17/Jun/2021 19:20:54] code 404, message File not found
+::1 - - [17/Jun/2021 19:20:54] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [17/Jun/2021 19:24:17] "GET / HTTP/1.1" 304 -
+::1 - - [17/Jun/2021 19:25:30] "GET /index.html HTTP/1.1" 200 -
+::1 - - [17/Jun/2021 19:25:42] "GET / HTTP/1.1" 304 -
+^C
+Keyboard interrupt received, exiting.
+$ 
+

@@ -92,4 +92,8 @@ def post_edit():
 
 #debug(True)
 #run(host="localhost", port=8080)
-application = default_app()
+if __name__ == "__main__":
+    debug(True)
+    run(host="localhost", port=8080)
+else:
+    application = default_app()

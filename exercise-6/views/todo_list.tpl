@@ -1,17 +1,17 @@
+<!DOCTYPE html>
 <html>
 <head>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-      rel="stylesheet">
+  %include header
 </head>
 <body>
-<table>
+%include banner
+<table class="table table-dark table-hover">
   <tr>
     <th>ID</th>
     <th>Task</th>
     <th>Completed</th>
-    <th>Delete?</th>
+    <th>Edit</th>
+    <th>Delete</th>
   </tr>
   %for item in items:
     <tr>

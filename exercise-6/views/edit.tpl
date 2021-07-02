@@ -1,5 +1,10 @@
+<!DOCTYPE html>
 <html>
+<head>
+%include header
+</head>
 <body>
+%include banner
 <form action="/edit" method="post">
 Description <input type="text" name="task" value="{{item['task']}}"/><br>
 <hr/>

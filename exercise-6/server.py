@@ -1,5 +1,6 @@
 from bottle import route, get, post, run, template, debug, request, response, redirect
 import dataset
+import json
 from bottle import default_app
 
 # http://localhost:8080/
@@ -15,11 +16,23 @@ def get_todo_list():
 
 @route("/data")
 def get_data():
-    data = {
-        "name": "Greg",
-        "ice_cream": "Chocolate",
+    pets = [
+    {
+        "name": "Dorothy",
+        "kind": "dog",
+    },
+    {
+        "name": "Squeakers",
+        "kind": "guinea pig",
+    },
+    {
+        "name": "Sandy",
+        "kind": "cat",
     }
-    return data
+    ]
+    
+    response.content_type = 'application/json'
+    return json.dumps({"pets":pets})
 
 @route("/show")
 def get_show():

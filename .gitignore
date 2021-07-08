@@ -8,6 +8,8 @@ __pycache__/
 *.db-wal
 *.db-shm
 
+.DS_store
+
 # C extensions
 *.so
 

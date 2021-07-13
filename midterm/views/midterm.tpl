@@ -44,9 +44,9 @@ Maya McDaniel
         <td>My cat Kiara</td>
       </tr>
       <tr>
-        <td><img src="sis&I.png" alt="My sister(right), me(left)" width=200></td>
-        <td><img src="Maximus.jpg" alt="My Nephew" width=200></td>
-        <td><img src="Kiara.jpg" alt="My fur child" width=200></td>
+        <td><img src="/static/sis&I.png" alt="My sister(right), me(left)" width=200></td>  
+        <td><img src="/static/Maximus.jpg" alt="My Nephew" width=200></td>
+        <td><img src="/static/Kiara.jpg" alt="My fur child" width=200></td>
       </tr>
     </tbody>
   </table>

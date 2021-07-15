@@ -1,0 +1,7 @@
+https://tobiasahlin.com/blog/move-from-jquery-to-vanilla-javascript/
+
+https://bottlepy.org/docs/0.11/stpl.html#the-include-statement
+
+https://github.com/bottlepy/bottle/issues/386
+
+https://bottlepy.org/docs/dev/tutorial.html#tutorial-signed-cookies

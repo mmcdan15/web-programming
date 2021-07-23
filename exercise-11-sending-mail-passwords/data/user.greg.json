@@ -1,0 +1,9 @@
+{
+    "username": "greg",
+    "credentials": {
+        "salt": "33b26368f6ae09c157d850941bbf85744e62a48898f5c0cfb16cbf696b66246f",
+        "key": "5a2dcdcb1db3863cd96a1e2e3a15942f6a77447fc617e6cbd023bf1de4b0e54b"
+    },
+    "email": "gdelozie@kent.edu",
+    "email_verified": false
+}

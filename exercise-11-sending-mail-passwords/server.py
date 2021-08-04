@@ -194,7 +194,7 @@ def send_verification_email(username):
     """
 
     message = MIMEMultipart("alternative")
-    message["Subject"] = "Test email from Python"
+    message["Subject"] = "Please verify your email"
     message["From"] = sender
     message["To"] = receiver
 
@@ -202,11 +202,64 @@ def send_verification_email(username):
     message.attach(MIMEText(html,"html"))
 
     with smtplib.SMTP("smtp.mailtrap.io", 2525) as server:
-        server.login("633fc6a1363148", "a1170619c0f06e")
+        server.login("4e83cff9aba69f", "988d5260c1b156")
         server.sendmail(sender, receiver, message.as_string())
 
     return
 
+def send_reset_email(username):
+    user = get_user(username)
+    if not user:
+        print("failure to find user")
+        return
+    print(user)
+    email = user['email']
+    token = create_token()
+    user['reset_token'] = token
+    save_user(username, user)
+    print('user information with reset token has been saved')
+
+    reset_url = f"http://localhost:8080/reset/{username}/{token}"
+
+    # send_message(email, message)
+    sender = "<app@example.com>"
+    receiver = f"{username}<{email}>"
+
+    text = f"""\
+        Please reset your password by visiting this page in your browser. 
+        
+        {reset_url}
+
+        Thanks! 
+
+        The admins..
+    """
+
+    html = f"""\
+        <html>
+        <body>
+        <p>Please verify your email by clicking here.<br/></p>
+
+        <p><a href="{reset_url}">{reset_url}</a><br/></p>
+
+        <p>-Thanks!<br>The admins/></p>
+        </body>
+        </html>
+    """
+
+    message = MIMEMultipart("alternative")
+    message["Subject"] = "Password reset request"
+    message["From"] = sender
+    message["To"] = receiver
+
+    message.attach(MIMEText(text,"plain"))
+    message.attach(MIMEText(html,"html"))
+
+    with smtplib.SMTP("smtp.mailtrap.io", 2525) as server:
+        server.login("4e83cff9aba69f", "988d5260c1b156")
+        server.sendmail(sender, receiver, message.as_string())
+
+    return
 
 @get("/signup")
 def get_signup():
@@ -240,9 +293,52 @@ def get_verify(token):
     session = get_session(request)
     username = session['username']
     user = get_user(username)
+    print(token)
+    print(user)
     if token == user['token']:
         user['email_verified'] = True
         save_user(username, user)
+
+@get("/forgot")
+def get_signup():
+    return template("forgot")
+
+@post("/forgot")
+def post_signup():
+    session = get_session(request)
+    username = request.forms.get('username')
+    user = get_user(username)
+    if user['email_verified']:
+        send_reset_email(username)
+    return redirect('/')
+
+@get("/reset/<username>/<reset_token>")
+def get_reset(username, reset_token):
+    user = get_user(username)
+    print(reset_token)
+    print(user)
+    if reset_token == user['reset_token']:
+        return template("reset", username=username, reset_token=reset_token)
+    return redirect('/')
+
+@post("/reset/<username>/<reset_token>")
+def post_reset(username, reset_token):
+    user = get_user(username)
+    print(reset_token)
+    print(user)
+    if reset_token != user['reset_token']:
+        return redirect('/')
+    user['reset_token'] = None
+    # get new password
+    password = request.forms.get('password')
+    password_again = request.forms.get('password_again')
+    if password != password_again:
+        #TODO: suitable message in session
+        save_session(response, session)
+        return redirect('/') 
+    user['credentials'] == generate_credentials(password)  
+    save_user(username, user)
+    return redirect('/login')
 
 @get("/logout")
 def get_logout():

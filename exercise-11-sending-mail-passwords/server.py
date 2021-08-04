@@ -314,15 +314,25 @@ def post_signup():
 
 @get("/reset/<username>/<reset_token>")
 def get_reset(username, reset_token):
+    session = get_session(request)
+    session['csrf_token'] = create_token()
     user = get_user(username)
     print(reset_token)
     print(user)
     if reset_token == user['reset_token']:
-        return template("reset", username=username, reset_token=reset_token)
+        save_session(response, session)
+        return template("reset", username=username, reset_token=reset_token, csrf_token=session['csrf_token'])
     return redirect('/')
 
 @post("/reset/<username>/<reset_token>")
 def post_reset(username, reset_token):
+    session = get_session(request)
+    if 'csrf_token' not in session:
+        redirect('/')
+    # check the csrf token
+    if request.forms.get('csrf_token') != session['csrf_token']:
+        redirect('/')
+    session['csrf_token'] = None
     user = get_user(username)
     print(reset_token)
     print(user)

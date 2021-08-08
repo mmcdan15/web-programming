@@ -123,6 +123,14 @@ def get_table():
     ]
     return template('table',table=table)
 
+@route("/drawing")
+def get_drawing():
+    return template('drawing')
+
+@route("/chart")
+def get_drawing():
+    return template('chart')
+
 @route("/request")
 def get_request():
     environ = request.environ

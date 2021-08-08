@@ -1,0 +1,6 @@
+If you want to use Gmail as SMTP you probably want to read this: 
+
+https://support.google.com/accounts/answer/185833?hl=en
+
+Only with TFA turned on and turning it on is a good idea. 
+
